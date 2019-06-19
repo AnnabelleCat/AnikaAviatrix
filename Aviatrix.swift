@@ -30,15 +30,18 @@ class Aviatrix {
         amountFilled = maxFuel - fuelLevel
         fuelLevel = maxFuel
         fuelCost = fuelCost + amountFilled*data.fuelPrices[location]!
-        amountFilled = Double(round(10.0*amountFilled)/10.0)
         fuelCost = Double(round(100.0*fuelCost)/100.0)
+        amountFilled = Double(round(10.0*amountFilled)/10.0)
         return data.fuelPrices[location]!
         
     }
     
     func flyTo(destination : String) {
         distanceTraveled = distanceTraveled + data.knownDistances[location]![destination]!;
+        milesPerGallon = 0.65 - fuelLevel*0.00005
         fuelLevel = maxFuel - milesPerGallon*Double(distanceTraveled)
+        fuelLevel = Double(round(10.0*fuelLevel)/10.0)
+        milesPerGallon = Double(round(100.0*milesPerGallon)/100.0)
         location = destination
     }
     
